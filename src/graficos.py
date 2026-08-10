@@ -3,31 +3,54 @@ import pandas as pd
 import plotly.graph_objects as go
 
 _OSCURO = True
+_ACENTO = None
 
 
-def set_tema(oscuro: bool) -> None:
-    global _OSCURO
+def set_tema(oscuro: bool, acento: str = None) -> None:
+    global _OSCURO, _ACENTO
     _OSCURO = oscuro
+    _ACENTO = acento
 
 
 def _acento() -> str:
-    return "#A0C9FF" if _OSCURO else "#0F4C81"
+    if _ACENTO:
+        return _ACENTO
+    return "#7EE8B0" if _OSCURO else "#007F5F"
 
 
 def _texto() -> str:
-    return "#E6EBEF" if _OSCURO else "#181C1E"
+    return "#E2ECE6" if _OSCURO else "#1A1C1A"
 
 
 def _grid() -> str:
-    return "rgba(148,163,184,0.22)" if _OSCURO else "rgba(24,28,30,0.08)"
+    return "rgba(148,163,184,0.22)" if _OSCURO else "rgba(26,28,26,0.08)"
+
+
+def _mezclar(hexc: str, blanco: float) -> str:
+    c = hexc.lstrip("#")
+    if len(c) != 6:
+        return hexc
+    r = int(c[0:2], 16)
+    g = int(c[2:4], 16)
+    b = int(c[4:6], 16)
+    r = int(r + (255 - r) * blanco)
+    g = int(g + (255 - g) * blanco)
+    b = int(b + (255 - b) * blanco)
+    return f"#{r:02x}{g:02x}{b:02x}"
 
 
 def _colores() -> list:
-    return (["#A0C9FF", "#65DCA4", "#48D7F9", "#FFB4AB", "#B7C1C9",
-             "#8AB4F8", "#81C995", "#F9ABA0"]
-            if _OSCURO else
-            ["#0F4C81", "#006C47", "#003945", "#BA1A1A", "#005262",
-             "#2D6197", "#38761D", "#E8710A"])
+    base = _acento()
+    resto = (["#6FE3B0", "#48D7F9", "#FFB4AB", "#B7C1C9", "#8AB4F8", "#81C995", "#F9ABA0"]
+             if _OSCURO else
+             ["#00796B", "#2E7D32", "#BA1A1A", "#5B8DEF", "#7B61FF", "#C2410C", "#00A5A5"])
+    return [base] + resto
+
+
+def _escala_calor() -> list:
+    a = _acento()
+    bajo = _mezclar(a, 0.8 if _OSCURO else 0.75)
+    return [[0, bajo], [1, a]]
 
 
 def _layout(fig, titulo: str, eje_x: str = "", eje_y: str = "") -> None:
@@ -63,7 +86,7 @@ def grafico_lineas(df: pd.DataFrame, fecha: str, valor: str) -> go.Figure:
     fig = go.Figure(go.Scatter(
         x=agg["_mes"], y=agg[valor], mode="lines+markers",
         line={"color": _acento(), "width": 3}, marker={"size": 6, "color": _acento()},
-        fill="tozeroy", fillcolor="rgba(15,76,129,0.08)",
+        fill="tozeroy", fillcolor="rgba(0,124,95,0.10)",
     ))
     _layout(fig, "Evolución mensual", eje_x="Mes", eje_y="Total")
     return fig
@@ -85,13 +108,10 @@ def grafico_pie(df: pd.DataFrame, grupo: str, valor: str) -> go.Figure:
 def grafico_calor(df: pd.DataFrame, fila: str, col: str, valor: str) -> go.Figure:
     pivot = df.pivot_table(index=fila, columns=col, values=valor, aggfunc="sum", fill_value=0)
     texto = [[_formato_corto(v) for v in fila_valores] for fila_valores in pivot.values]
-    escala = ([[0, "#1F2C38"], [0.5, "#0F4C81"], [1, "#48D7F9"]]
-              if _OSCURO else
-              [[0, "#E2ECF7"], [0.5, "#0F4C81"], [1, "#006C47"]])
     fig = go.Figure(go.Heatmap(
         z=pivot.values, x=pivot.columns.tolist(), y=pivot.index.tolist(),
         text=texto, texttemplate="%{text}",
-        colorscale=escala,
+        colorscale=_escala_calor(),
         colorbar={"title": "Total"},
     ))
     _layout(fig, f"Mapa de calor: {fila} × {col}", eje_x=col, eje_y=fila)

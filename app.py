@@ -7,7 +7,7 @@ import streamlit as st
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from src import cargador, estadistica, graficos, insights
-from src.ui import (RED, TEAL, cabecera, formatear_dinero,
+from src.ui import (PALETAS, RED, TEAL, cabecera, formatear_dinero,
                     formatear_monto_corto, inyectar_css, inyectar_tema, kpi,
                     mostrar_grafico, mostrar_lectura, mostrar_recomendaciones,
                     mostrar_tabla, tarjeta_kpi)
@@ -47,9 +47,6 @@ def _aplicar_filtros(df: pd.DataFrame, meta: dict):
 
 def _sidebar(fuente: str):
     with st.sidebar:
-        st.header("Apariencia")
-        st.radio("Tema", ["Oscuro", "Claro", "Sistema"], key="tema", label_visibility="collapsed")
-        st.divider()
         st.header("Fuente de datos")
         fuente = st.radio(
             "¿De dónde leo la información?",
@@ -422,9 +419,11 @@ def _pestania_explorador(df: pd.DataFrame):
 
 def main() -> None:
     modo = st.session_state.get("tema", "Oscuro")
+    paleta = st.session_state.get("paleta", "Esmeralda")
     inyectar_css()
-    inyectar_tema(modo)
-    graficos.set_tema(modo != "Claro")
+    inyectar_tema(modo, paleta)
+    datos_paleta = PALETAS.get(paleta) or PALETAS["Esmeralda"]
+    graficos.set_tema(modo != "Claro", datos_paleta["oscuro" if modo != "Claro" else "claro"]["acento"])
 
     _sidebar(st.session_state.get("fuente", "ejemplo"))
     df = st.session_state.get("df")

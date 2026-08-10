@@ -8,42 +8,124 @@ AMBER = "#F59E0B"
 GREEN = "#006C47"
 RED = "#BA1A1A"
 
-_TEMA_CLARO = """
-:root{
-  --bg:#f7fafc; --surface:#f7fafc; --surface-lowest:#ffffff;
-  --surface-container:#ebeef0; --surface-container-high:#e5e9eb; --surface-container-highest:#e0e3e5;
-  --outline:#727780; --outline-variant:#c2c7d1;
-  --on-surface:#181c1e; --on-surface-variant:#42474f;
-  --primary:#00355f; --primary-container:#0f4c81; --on-primary:#ffffff;
-  --secondary:#006c47; --secondary-container:#82f9be; --on-secondary-container:#00734c;
-  --tertiary:#003945; --tertiary-container:#005262; --on-tertiary-container:#35caec;
-  --error:#ba1a1a; --error-container:#ffdad6; --on-error-container:#93000a;
-  --card-shadow: 0 4px 20px rgba(15,76,129,0.06);
+PALETAS = {
+    "Esmeralda": {
+        "claro": {
+            "bg": "#F7F9F4", "surface": "#F7F9F4", "surface-lowest": "#FFFFFF",
+            "surface-container": "#EFF2EC", "surface-container-high": "#E7ECE4",
+            "surface-container-highest": "#DFE5DC", "outline": "#6F7972",
+            "outline-variant": "#C2CCC4", "on-surface": "#1A1C1A", "on-surface-variant": "#444C46",
+            "primary": "#005C43", "primary-container": "#007F5F", "on-primary": "#FFFFFF",
+            "secondary": "#00796B", "secondary-container": "#9FEEDC", "on-secondary-container": "#00564A",
+            "tertiary": "#2E7D32", "tertiary-container": "#005C43", "on-tertiary-container": "#7CF2B0",
+            "error": "#BA1A1A", "error-container": "#FFDAD6", "on-error-container": "#93000A",
+            "card-shadow": "0 4px 20px rgba(0,124,95,0.08)", "acento": "#007F5F",
+        },
+        "oscuro": {
+            "bg": "#0E1512", "surface": "#0E1512", "surface-lowest": "#141C18",
+            "surface-container": "#1A2420", "surface-container-high": "#202B26",
+            "surface-container-highest": "#26332D", "outline": "#8FA096",
+            "outline-variant": "#3D4A44", "on-surface": "#E2ECE6", "on-surface-variant": "#B6C4BC",
+            "primary": "#7EE8B0", "primary-container": "#005C43", "on-primary": "#00392A",
+            "secondary": "#6FE3B0", "secondary-container": "#00564A", "on-secondary-container": "#9FEEDC",
+            "tertiary": "#7CF2B0", "tertiary-container": "#00452F", "on-tertiary-container": "#B9FDD8",
+            "error": "#FFB4AB", "error-container": "#93000A", "on-error-container": "#FFDAD6",
+            "card-shadow": "0 4px 20px rgba(0,0,0,0.4)", "acento": "#7EE8B0",
+        },
+    },
+    "Teal": {
+        "claro": {
+            "bg": "#F3FAFA", "surface": "#F3FAFA", "surface-lowest": "#FFFFFF",
+            "surface-container": "#E9F2F2", "surface-container-high": "#DFECEC",
+            "surface-container-highest": "#D4E4E4", "outline": "#647D7D",
+            "outline-variant": "#B9CCCC", "on-surface": "#16201F", "on-surface-variant": "#3E4E4D",
+            "primary": "#006B6B", "primary-container": "#0E9494", "on-primary": "#FFFFFF",
+            "secondary": "#00796B", "secondary-container": "#A7EFEA", "on-secondary-container": "#005B50",
+            "tertiary": "#00897B", "tertiary-container": "#0E7490", "on-tertiary-container": "#7DF2EC",
+            "error": "#BA1A1A", "error-container": "#FFDAD6", "on-error-container": "#93000A",
+            "card-shadow": "0 4px 20px rgba(14,148,148,0.10)", "acento": "#0E9494",
+        },
+        "oscuro": {
+            "bg": "#0C1414", "surface": "#0C1414", "surface-lowest": "#12201E",
+            "surface-container": "#172726", "surface-container-high": "#1D2F2D",
+            "surface-container-highest": "#233735", "outline": "#8CA6A5",
+            "outline-variant": "#3C4F4E", "on-surface": "#E0ECEA", "on-surface-variant": "#B4C8C6",
+            "primary": "#5EEAD4", "primary-container": "#006B6B", "on-primary": "#00363A",
+            "secondary": "#6FE3C0", "secondary-container": "#005B50", "on-secondary-container": "#A7EFEA",
+            "tertiary": "#7DF2EC", "tertiary-container": "#0E7490", "on-tertiary-container": "#B5FBF7",
+            "error": "#FFB4AB", "error-container": "#93000A", "on-error-container": "#FFDAD6",
+            "card-shadow": "0 4px 20px rgba(0,0,0,0.4)", "acento": "#5EEAD4",
+        },
+    },
+    "Índigo": {
+        "claro": {
+            "bg": "#F8F7FC", "surface": "#F8F7FC", "surface-lowest": "#FFFFFF",
+            "surface-container": "#EFEDF7", "surface-container-high": "#E6E3F2",
+            "surface-container-highest": "#DCD8EC", "outline": "#757A8C",
+            "outline-variant": "#C4C3D6", "on-surface": "#1B1B21", "on-surface-variant": "#454653",
+            "primary": "#4338CA", "primary-container": "#4F46E5", "on-primary": "#FFFFFF",
+            "secondary": "#7C3AED", "secondary-container": "#C7BFF9", "on-secondary-container": "#4C1D95",
+            "tertiary": "#6D28D9", "tertiary-container": "#7B61FF", "on-tertiary-container": "#E2DBFF",
+            "error": "#BA1A1A", "error-container": "#FFDAD6", "on-error-container": "#93000A",
+            "card-shadow": "0 4px 20px rgba(79,70,229,0.10)", "acento": "#4F46E5",
+        },
+        "oscuro": {
+            "bg": "#121117", "surface": "#121117", "surface-lowest": "#1A1921",
+            "surface-container": "#211F29", "surface-container-high": "#28252F",
+            "surface-container-highest": "#2F2C37", "outline": "#9799A8",
+            "outline-variant": "#4A4957", "on-surface": "#EBEAF2", "on-surface-variant": "#C1C0CD",
+            "primary": "#A5B4FC", "primary-container": "#4338CA", "on-primary": "#1E1B5E",
+            "secondary": "#C7BFF9", "secondary-container": "#4C1D95", "on-secondary-container": "#D5CEFF",
+            "tertiary": "#B7ACFF", "tertiary-container": "#6D28D9", "on-tertiary-container": "#EAE6FF",
+            "error": "#FFB4AB", "error-container": "#93000A", "on-error-container": "#FFDAD6",
+            "card-shadow": "0 4px 20px rgba(0,0,0,0.4)", "acento": "#A5B4FC",
+        },
+    },
+    "Coral": {
+        "claro": {
+            "bg": "#FBF6F2", "surface": "#FBF6F2", "surface-lowest": "#FFFFFF",
+            "surface-container": "#F4EAE3", "surface-container-high": "#EEE0D6",
+            "surface-container-highest": "#E7D6CA", "outline": "#85746C",
+            "outline-variant": "#D2C1B8", "on-surface": "#211A16", "on-surface-variant": "#52453E",
+            "primary": "#C2410C", "primary-container": "#E8722A", "on-primary": "#FFFFFF",
+            "secondary": "#E85D75", "secondary-container": "#FFD9DE", "on-secondary-container": "#A01832",
+            "tertiary": "#B45309", "tertiary-container": "#F59E0B", "on-tertiary-container": "#7A3B00",
+            "error": "#BA1A1A", "error-container": "#FFDAD6", "on-error-container": "#93000A",
+            "card-shadow": "0 4px 20px rgba(232,114,42,0.10)", "acento": "#E8722A",
+        },
+        "oscuro": {
+            "bg": "#180F0A", "surface": "#180F0A", "surface-lowest": "#221711",
+            "surface-container": "#2B1D15", "surface-container-high": "#332318",
+            "surface-container-highest": "#3B2A1D", "outline": "#A49184",
+            "outline-variant": "#57473E", "on-surface": "#F1E5DC", "on-surface-variant": "#CDBEB4",
+            "primary": "#FDBA74", "primary-container": "#C2410C", "on-primary": "#4A1C00",
+            "secondary": "#FFB4BF", "secondary-container": "#A01832", "on-secondary-container": "#FFD9DE",
+            "tertiary": "#FFB84D", "tertiary-container": "#B45309", "on-tertiary-container": "#FFE1B5",
+            "error": "#FFB4AB", "error-container": "#93000A", "on-error-container": "#FFDAD6",
+            "card-shadow": "0 4px 20px rgba(0,0,0,0.45)", "acento": "#FDBA74",
+        },
+    },
 }
-"""
-
-_TEMA_OSCURO = """
-:root{
-  --bg:#0f141a; --surface:#0f141a; --surface-lowest:#161d24;
-  --surface-container:#1a222b; --surface-container-high:#202933; --surface-container-highest:#26313c;
-  --outline:#8d99a3; --outline-variant:#3a434d;
-  --on-surface:#e6ebef; --on-surface-variant:#b7c1c9;
-  --primary:#a0c9ff; --primary-container:#0f4c81; --on-primary:#0a3556;
-  --secondary:#65dca4; --secondary-container:#00734c; --on-secondary-container:#82f9be;
-  --tertiary:#48d7f9; --tertiary-container:#005262; --on-tertiary-container:#afecff;
-  --error:#ffb4ab; --error-container:#93000a; --on-error-container:#ffdad6;
-  --card-shadow: 0 4px 20px rgba(0,0,0,0.35);
-}
-"""
-
-_TEMA_SISTEMA = _TEMA_OSCURO + """
-@media (prefers-color-scheme: light){ :root{"""
-_TEMA_SISTEMA += _TEMA_CLARO.replace(":root{", "").replace("}", "}")
-_TEMA_SISTEMA += "} }"
 
 
-def inyectar_tema(modo: str) -> None:
-    bloque = {"Oscuro": _TEMA_OSCURO, "Claro": _TEMA_CLARO, "Sistema": _TEMA_SISTEMA}.get(modo, _TEMA_OSCURO)
+def _declaraciones(d: dict) -> str:
+    return "".join(f"--{k}:{v};" for k, v in d.items())
+
+
+def _vars_css(d: dict) -> str:
+    return f":root{{{_declaraciones(d)}}}"
+
+
+def inyectar_tema(modo: str, paleta: str) -> None:
+    datos = PALETAS.get(paleta) or PALETAS["Esmeralda"]
+    if modo == "Claro":
+        bloque = _vars_css(datos["claro"])
+    elif modo == "Sistema":
+        bloque = (_vars_css(datos["oscuro"])
+                  + "@media (prefers-color-scheme: light){:root{"
+                  + _declaraciones(datos["claro"]) + "}}")
+    else:
+        bloque = _vars_css(datos["oscuro"])
     st.markdown(f"<style>{bloque}</style>", unsafe_allow_html=True)
 
 
@@ -53,15 +135,15 @@ _CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap');
 
 :root{
-  --bg:#f7fafc; --surface:#f7fafc; --surface-lowest:#ffffff;
-  --surface-container:#ebeef0; --surface-container-high:#e5e9eb; --surface-container-highest:#e0e3e5;
-  --outline:#727780; --outline-variant:#c2c7d1;
-  --on-surface:#181c1e; --on-surface-variant:#42474f;
-  --primary:#00355f; --primary-container:#0f4c81; --on-primary:#ffffff;
-  --secondary:#006c47; --secondary-container:#82f9be; --on-secondary-container:#00734c;
-  --tertiary:#003945; --tertiary-container:#005262; --on-tertiary-container:#35caec;
-  --error:#ba1a1a; --error-container:#ffdad6; --on-error-container:#93000a;
-  --card-shadow: 0 4px 20px rgba(15,76,129,0.06);
+  --bg:#F7F9F4; --surface:#F7F9F4; --surface-lowest:#FFFFFF;
+  --surface-container:#EFF2EC; --surface-container-high:#E7ECE4; --surface-container-highest:#DFE5DC;
+  --outline:#6F7972; --outline-variant:#C2CCC4;
+  --on-surface:#1A1C1A; --on-surface-variant:#444C46;
+  --primary:#005C43; --primary-container:#007F5F; --on-primary:#FFFFFF;
+  --secondary:#00796B; --secondary-container:#9FEEDC; --on-secondary-container:#00564A;
+  --tertiary:#2E7D32; --tertiary-container:#005C43; --on-tertiary-container:#7CF2B0;
+  --error:#BA1A1A; --error-container:#FFDAD6; --on-error-container:#93000A;
+  --card-shadow: 0 4px 20px rgba(0,124,95,0.08);
   --font-body:'Inter',sans-serif; --font-head:'Manrope',sans-serif; --font-label:'JetBrains Mono',monospace;
 }
 
@@ -74,14 +156,13 @@ _CSS = """
 
 html, body, .stApp{ background:var(--bg); color:var(--on-surface); font-family:var(--font-body); }
 .block-container{ padding-top:1.25rem; max-width:1200px; }
-[data-testid="stHeader"]{ background:transparent; }
+[data-testid="stHeader"]{ display:none !important; }
+footer{ visibility:hidden; }
 [data-testid="stSidebar"]{ background:var(--surface-container); border-right:1px solid var(--outline-variant); }
 [data-testid="stSidebar"] .block-container{ max-width:100%; }
 h1,h2,h3,h4{ font-family:var(--font-head); color:var(--on-surface); }
 p, li{ color:var(--on-surface); }
 
-.theview-header{ display:flex; align-items:center; justify-content:space-between; gap:12px;
-  border-bottom:1px solid var(--outline-variant); padding-bottom:16px; margin-bottom:8px; }
 .theview-brand{ display:flex; align-items:center; gap:12px; }
 .theview-logo{ width:36px; height:36px; border-radius:999px; background:var(--primary-container);
   color:#ffffff; display:flex; align-items:center; justify-content:center;
@@ -90,14 +171,18 @@ p, li{ color:var(--on-surface); }
   color:var(--primary); letter-spacing:-0.01em; margin:0; }
 .theview-chip{ display:flex; align-items:center; gap:8px; border:1px solid var(--outline-variant);
   background:var(--surface-lowest); border-radius:999px; padding:8px 14px;
-  font-family:var(--font-label); font-size:12px; color:var(--on-surface-variant); }
+  font-family:var(--font-label); font-size:12px; color:var(--on-surface-variant);
+  margin-left:auto; }
 .theview-chip .material-symbols-outlined{ font-size:16px; color:var(--outline); }
+.theview-divider{ border-bottom:1px solid var(--outline-variant); margin-bottom:8px; }
+.menu-titulo{ font-family:var(--font-label); font-size:10px; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--on-surface-variant); margin-bottom:2px; }
 
 .kpi-card{ background:var(--surface-container-lowest); border:1px solid var(--outline-variant);
   border-radius:0.5rem; box-shadow:var(--card-shadow); padding:18px 20px; min-height:148px;
   display:flex; flex-direction:column; justify-content:space-between;
-  transition:box-shadow .2s ease, transform .2s ease; }
-.kpi-card:hover{ box-shadow:var(--card-shadow), 0 8px 28px rgba(15,76,129,0.10); }
+  transition:box-shadow .2s ease; }
+.kpi-card:hover{ box-shadow:var(--card-shadow), 0 8px 28px rgba(0,0,0,0.08); }
 .kpi-mini{ min-height:118px; }
 .kpi-head{ display:flex; justify-content:space-between; align-items:center; gap:8px; }
 .kpi-label{ font-family:var(--font-label); font-size:11px; letter-spacing:0.08em;
@@ -247,17 +332,26 @@ def cabecera(df, meta) -> None:
         col = pd.to_datetime(df[meta["fecha"]])
         if len(col):
             rango = f"{fecha_es(col.min().date())} - {fecha_es(col.max().date())}"
-            chip = (f'<div class="theview-chip">'
+            chip = (f'<span class="theview-chip">'
                     f'<span class="material-symbols-outlined">calendar_month</span>'
-                    f'<span>{rango}</span></div>')
-    st.markdown(
-        f'<div class="theview-header">'
-        f'<div class="theview-brand">'
-        f'<div class="theview-logo">TV</div>'
-        f'<h1 class="theview-title">The View</h1>'
-        f'</div>{chip}</div>',
-        unsafe_allow_html=True,
-    )
+                    f'<span>{rango}</span></span>')
+    marca = (f'<div class="theview-brand">'
+             f'<div class="theview-logo">TV</div>'
+             f'<h1 class="theview-title">The View</h1>'
+             f'{chip}</div>')
+
+    izq, der = st.columns([5, 1], vertical_alignment="center")
+    with izq:
+        st.markdown(marca, unsafe_allow_html=True)
+    with der:
+        with st.popover("⋮", help="Ajustes de apariencia"):
+            st.markdown('<div class="menu-titulo">APARIENCIA</div>', unsafe_allow_html=True)
+            st.radio("Tema", ["Oscuro", "Claro", "Sistema"], key="tema", label_visibility="collapsed")
+            st.markdown('<div class="menu-titulo">PALETA DE COLORES</div>', unsafe_allow_html=True)
+            st.radio("Paleta", list(PALETAS.keys()), key="paleta", label_visibility="collapsed")
+            st.divider()
+            st.caption("The View · v1.0 · dashboard con lectura automática y recomendaciones")
+    st.markdown('<div class="theview-divider"></div>', unsafe_allow_html=True)
 
 
 def mostrar_lectura(frases) -> None:
