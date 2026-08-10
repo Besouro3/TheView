@@ -178,6 +178,16 @@ p, li{ color:var(--on-surface); }
 .menu-titulo{ font-family:var(--font-label); font-size:10px; letter-spacing:0.12em;
   text-transform:uppercase; color:var(--on-surface-variant); margin-bottom:2px; }
 
+[data-testid="stPopover"]{ position:fixed; top:0.85rem; right:1.05rem; z-index:1000; }
+[data-testid="stPopoverButton"]{
+  border:1px solid var(--outline-variant); border-radius:999px;
+  width:42px; height:42px; min-width:42px; max-width:42px; padding:0;
+  background:var(--surface-lowest); color:var(--on-surface);
+  box-shadow:var(--card-shadow); display:flex; align-items:center; justify-content:center;
+  font-size:24px; line-height:1; }
+[data-testid="stPopoverButton"]:hover{ border-color:var(--primary); color:var(--primary); }
+[data-testid="stPopoverButton"] [aria-hidden="true"]{ display:none !important; }
+
 .kpi-card{ background:var(--surface-container-lowest); border:1px solid var(--outline-variant);
   border-radius:0.5rem; box-shadow:var(--card-shadow); padding:18px 20px; min-height:148px;
   display:flex; flex-direction:column; justify-content:space-between;
@@ -346,7 +356,7 @@ def cabecera(df, meta) -> None:
     with der:
         with st.popover("⋮", help="Ajustes de apariencia"):
             st.markdown('<div class="menu-titulo">APARIENCIA</div>', unsafe_allow_html=True)
-            st.radio("Tema", ["Oscuro", "Claro", "Sistema"], key="tema", label_visibility="collapsed")
+            st.radio("Tema", ["Oscuro", "Sistema"], key="tema", label_visibility="collapsed")
             st.markdown('<div class="menu-titulo">PALETA DE COLORES</div>', unsafe_allow_html=True)
             st.radio("Paleta", list(PALETAS.keys()), key="paleta", label_visibility="collapsed")
             st.divider()

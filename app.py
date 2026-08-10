@@ -418,6 +418,8 @@ def _pestania_explorador(df: pd.DataFrame):
 
 
 def main() -> None:
+    if st.session_state.get("tema") not in ("Oscuro", "Sistema"):
+        st.session_state["tema"] = "Oscuro"
     modo = st.session_state.get("tema", "Oscuro")
     paleta = st.session_state.get("paleta", "Esmeralda")
     inyectar_css()
