@@ -258,6 +258,40 @@ button[kind="secondary"]:hover, .stButton>button[kind="secondary"]:hover{ border
 [data-testid="stDataFrame"]{ border:1px solid var(--outline-variant); border-radius:0.5rem; }
 .stAlert{ border-radius:0.5rem; }
 .stAppDeployButton{ display:none !important; }
+
+[data-testid="stPopoverButton"]{
+  border:1px solid var(--outline-variant) !important;
+  background:var(--surface-lowest) !important;
+  color:var(--on-surface) !important;
+  box-shadow:var(--card-shadow) !important;
+}
+[data-testid="stPopoverButton"]:hover{
+  border-color:var(--primary) !important;
+  color:var(--primary) !important;
+}
+
+[data-testid="stSelectbox"] [data-baseweb="select"],
+[data-testid="stMultiSelect"] [data-baseweb="select"],
+[data-testid="stDateInput"] [data-baseweb="base-input"]{
+  background:var(--surface-lowest) !important;
+  border-color:var(--outline-variant) !important;
+  color:var(--on-surface) !important;
+}
+[data-testid="stSelectbox"] [data-baseweb="select"]:focus-within,
+[data-testid="stMultiSelect"] [data-baseweb="select"]:focus-within,
+[data-testid="stDateInput"] [data-baseweb="base-input"]:focus-within{
+  border-color:var(--primary) !important;
+  box-shadow:0 0 0 1px var(--primary) !important;
+}
+[data-testid="stSelectbox"] [data-baseweb="select"] svg,
+[data-testid="stMultiSelect"] [data-baseweb="select"] svg,
+[data-testid="stDateInput"] [data-baseweb="base-input"] svg{
+  color:var(--on-surface-variant) !important;
+  fill:var(--on-surface-variant) !important;
+}
+[data-testid="stMultiSelect"] [data-baseweb="tag"]{
+  background-color:var(--primary-container) !important;
+}
 </style>
 """
 
