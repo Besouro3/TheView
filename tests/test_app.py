@@ -1,6 +1,12 @@
+import os
+from pathlib import Path
+
 from streamlit.testing.v1 import AppTest
 
-at = AppTest.from_file("app.py", default_timeout=120)
+ROOT = Path(__file__).resolve().parent.parent
+os.chdir(ROOT)
+
+at = AppTest.from_file(ROOT / "app.py", default_timeout=120)
 at.run()
 
 print("errores:", at.exception)
